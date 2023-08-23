@@ -1,0 +1,28 @@
+service: manager-express-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  test-manager:
+    handler: dist/index.handler
+    timeout: 120
+    environment:
+      ACCESSOR_LAMBDA_EXPRESS: accessor-express-dev-get-data
+      ACCESSOR_LAMBDA_INVOKE_DIRECT: accessor-invoke-directly-dev-get-data
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-offline
+  # - serverless-offline-lambda
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+    lambdaPort: 2999
+
+  # serverless-offline-lambda:
+    # lambdaPort: 2999

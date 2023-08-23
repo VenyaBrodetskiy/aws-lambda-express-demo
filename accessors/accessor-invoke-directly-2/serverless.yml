@@ -1,0 +1,20 @@
+service: accessor-invoke-directly
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  get-data:
+    handler: dist/index.handler
+    timeout: 120
+
+plugins:
+  - serverless-offline
+
+
+custom:
+  serverless-offline:
+    lambdaPort: 3003
+  
